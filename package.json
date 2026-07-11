@@ -1,0 +1,27 @@
+{
+  "name": "demo-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Liene31/demo-typescript.git"
+  },
+  "author": "Liene",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Liene31/demo-typescript/issues"
+  },
+  "homepage": "https://github.com/Liene31/demo-typescript#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.9",
+    "@types/express": "^5.0.6",
+    "typescript": "^7.0.2"
+  }
+}
