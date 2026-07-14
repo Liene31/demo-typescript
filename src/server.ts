@@ -12,16 +12,35 @@ const app: Express = express();
 app.use(cors());
 
 app.get("/", (req: Request, res: Response<Pet[]>): void => {
+  const query = req.query;
+
+  console.log(query.species);
+
+  // const filteredPets = pets.filter((pet) => {
+  //   return pet.species.toLowerCase() === query.species.toLowerCase();
+  // });
+
   res.status(200).json(pets);
 });
 
-app.get("/:id", (req: Request<{ id: string }>, res: Response): void => {
-  const id = req.params.id;
+app.get(
+  "/pets/:id",
+  (
+    req: Request<{ id: string }>,
+    res: Response<Pet | { statusCode: number; message: string }>,
+  ): void => {
+    const id = req.params.id;
 
-  const pet = pets.find((pet) => pet.id.toString() === id);
+    const pet: Pet | undefined = pets.find(
+      (pet: Pet): boolean => pet.id.toString() === id,
+    );
+    if (!pet) {
+      res.status(404).json({ statusCode: 404, message: "Pet not found" });
+    }
 
-  res.status(200).json(pet);
-});
+    res.status(200).json(pet);
+  },
+);
 
 app.use(
   (
