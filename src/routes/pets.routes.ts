@@ -6,6 +6,6 @@ import { pleaseAuth, validateNumericId } from "../middleware/pets.middleware";
 
 export const petRouter: Router = express.Router();
 
-petRouter.get("/", getPets);
+petRouter.get("/pets", getPets);
 
 petRouter.get("/pets/:id", pleaseAuth, validateNumericId, getPetById);
