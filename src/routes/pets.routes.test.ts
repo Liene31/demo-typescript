@@ -32,4 +32,21 @@ describe("GET /api/pets", () => {
     //response body returns only Dogs since that's what's in quarry "/api/pets?species=Dog"
     expect(response.body.length).toBe(expectedDogCount);
   });
+
+  it("returns only adopted pets", async () => {
+    const response = await request(app).get("/api/pets?adopted=true");
+    expect(response.body.every((pet: Pet) => pet.adopted === true)).toBe(true);
+  });
+
+  it("check if source data has the same count of adopted pets as received in response", async () => {
+    const response = await request(app).get("/api/pets?adopted=true");
+
+    //from data source ../data/pets
+    const expectedPetCount = pets.filter(
+      (pet: Pet) => pet.adopted === true,
+    ).length;
+
+    //response body returns only adopted pets since that's what's in quarry "/api/pets?adopted=true"
+    expect(response.body.length).toBe(expectedPetCount);
+  });
 });
